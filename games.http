@@ -1,0 +1,25 @@
+﻿GET http://localhost:5277/games
+###
+GET http://localhost:5277/games/39
+###
+POST http://localhost:5277/games
+Content-Type: application/json
+{
+  "name": "Lord Of Rings",
+  "genreId": 3,
+  "price": 99.99,
+  "releseDate": "2021-05-15"
+}
+###
+PUT http://localhost:5277/games/3
+Content-Type:application/json
+{
+    "name": "League of Legends",
+    "genreId": 1,
+    "price": 99.19,
+    "releseDate": "2023-05-15"
+}
+###
+DELETE http://localhost:5277/games/39
+###
+GET http://localhost:5277/games/4
