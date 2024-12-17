@@ -3,16 +3,21 @@ using GameStore.Dtos;
 using GameStore.Entities;
 using GameStore.Mapping;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
 namespace GameStore.EndPoints
 {
     public static class GameEndPoints
     {
+
+        // Extension method to map game-related endpoints
         public static RouteGroupBuilder MapGamesEndPoints(this WebApplication app)
         {
+            // Create a route group for "games" endpoints
             var group = app.MapGroup("games").WithParameterValidation();
             const string GetGameEndpointName = "GetGame";
 
+            // GET: List all games
             group.MapGet("/", async (GameStoreContext dbContext) =>
             {
                 var games = await dbContext.Games
@@ -23,6 +28,7 @@ namespace GameStore.EndPoints
                 return Results.Ok(games);
             });
 
+            // GET: Retrieve a game by ID
             group.MapGet("/{id}", async (int id, GameStoreContext dbContext) =>
             {
                 var game = await dbContext.Games.FindAsync(id);
@@ -68,6 +74,7 @@ namespace GameStore.EndPoints
                 return Results.NoContent();
             });
 
+            // DELETE: Remove a game by ID
             group.MapDelete("/{id}", async (int id, GameStoreContext dbContext) =>
             {
                 var game = await dbContext.Games.FindAsync(id);
